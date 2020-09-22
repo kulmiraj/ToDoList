@@ -20,12 +20,34 @@ class MainActivity : AppCompatActivity() {
 
         todoItemRecylerView=findViewById(R.id.todo_item_recycler_view)
 
-        todoItemsList.add(TodoItem("Tea","Tea Green",true))
-        todoItemsList.add(TodoItem("Milk","Cow Milk"))
-        todoItemsList.add(TodoItem("Sugar","Sweet",false))
+        val dbo=DatabaseOpener(this)
+        val cursor= dbo.getAllItem(dbo)
+        with(cursor)
+        {
+          //  cursor.moveToFirst()
+            if(cursor != null) {
+
+                if (cursor.moveToFirst()) {
+                    while (cursor.moveToNext()) {
+                        val itemName =
+                            cursor.getString(1)
+                        val itemDesc = getString(getColumnIndex(DatabaseInfo.TableInfo.COLUMN_DESC))
+                        val itemUrgency =
+                            getInt(getColumnIndex(DatabaseInfo.TableInfo.COLUMN_ISURGENT))
+                        val isUrgent = if (itemUrgency == 0) false else true
+                        todoItemsList.add(TodoItem(itemName, itemDesc, isUrgent))
+                    }
+                }
+            }
+        }
+
+
+//        todoItemsList.add(TodoItem("Tea","Tea Green",true))
+//        todoItemsList.add(TodoItem("Milk","Cow Milk"))
+//        todoItemsList.add(TodoItem("Sugar","Sweet",false))
 
         recyclerLayoutManager=LinearLayoutManager(this)
-        recycleAdapter= ToDoItemsAdapter(todoItemsList)
+        recycleAdapter= ToDoItemsAdapter(todoItemsList,this)
         todoItemRecylerView.apply {
             setHasFixedSize(true)
             layoutManager=recyclerLayoutManager

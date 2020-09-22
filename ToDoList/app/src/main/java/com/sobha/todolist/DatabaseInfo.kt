@@ -11,7 +11,7 @@ object DatabaseInfo {
             "${TableInfo.COLUMN_ISURGENT} INTEGER,"+
             "${TableInfo.COLUMN_DATE} TEXT)"
     //Query to drop table if exists
-    const val SQL_DETE_TABLE_QUERY="DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME}"
+    const val SQL_DELETE_TABLE_QUERY="DROP TABLE IF EXISTS ${TableInfo.TABLE_NAME}"
     //Define Table and Column Name
             object TableInfo:BaseColumns
     {

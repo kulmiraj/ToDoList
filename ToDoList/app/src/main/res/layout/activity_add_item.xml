@@ -28,7 +28,6 @@
         android:layout_marginTop="68dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_title_text_view" />
 
@@ -70,10 +69,14 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
         android:text="High Priority"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="349dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.185" />
 
     <CheckBox
         android:id="@+id/chkPriority"
@@ -94,7 +97,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnCancel"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:onClick="SaveItemAction"
+        />
 
     <Button
         android:id="@+id/btnCancel"
@@ -104,6 +109,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chkPriority" />
+        app:layout_constraintTop_toBottomOf="@+id/chkPriority"
+        android:onClick="CancelItemAction"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

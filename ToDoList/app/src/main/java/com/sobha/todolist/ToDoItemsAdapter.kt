@@ -17,8 +17,8 @@ class ViewHolder(val constraintLayout: ConstraintLayout):RecyclerView.ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val constraintLayout=LayoutInflater.from(parent.context).inflate(
         R.layout.to_do_item_layout,parent,false) as ConstraintLayout
-        return ViewHolder(constraintLayout)
-     //   TODO("Not yet implemented")
+
+
 
         constraintLayout.setOnClickListener(View.OnClickListener {
             val nameTextView=constraintLayout.getChildAt(0) as TextView
@@ -26,7 +26,7 @@ class ViewHolder(val constraintLayout: ConstraintLayout):RecyclerView.ViewHolder
             var Name=nameTextView.text
             val textFromDescct=descTextView.text.split("'").toTypedArray()
             val Desc=textFromDescct[0]
-            val isUrgent=if(textFromDescct[1]=="!!")true else false
+            val isUrgent=if(textFromDescct[1] =="!!")true else false
             val intent: Intent = Intent(parent.context ,AddItemActivity::class.java)
             intent.putExtra("ITEM_NAME",Name)
             intent.putExtra("ITEM_DESC",Desc)
@@ -35,11 +35,15 @@ class ViewHolder(val constraintLayout: ConstraintLayout):RecyclerView.ViewHolder
         })
         constraintLayout.setOnLongClickListener(View.OnLongClickListener {
             val position:Int=parent.indexOfChild(it)
+            val todoItemToRemove=   activity.todoItemsList[position]
+            val dbo=DatabaseOpener(parent.context)
+            dbo.deleteItem(dbo,todoItemToRemove)
             activity.todoItemsList.removeAt(position)
             notifyItemRemoved(position)
             true
             //OnLongClickListener true
         })
+        return ViewHolder(constraintLayout)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
